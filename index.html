@@ -3,36 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dert Yak</title>
+    <title>Ruhunu Arındır</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="main-container">
+    <div class="dungeon-bg"></div>
+
+    <div class="main-frame">
         <h1 id="page-title"></h1>
         
-        <div class="paper-container">
+        <div class="parchment-container" id="parchment">
             <textarea id="thought-input" placeholder=""></textarea>
             
+            <div id="char-overlay" class="hidden"></div>
+
             <div id="fire-container" class="fire-wrapper hidden">
-                <div class="fire-base">
-                    <div class="flame red"></div>
-                    <div class="flame orange"></div>
-                    <div class="flame yellow"></div>
-                    <div class="flame white"></div>
+                <div class="flame-layer dark"></div>
+                <div class="flame-layer red"></div>
+                <div class="flame-layer orange"></div>
+                <div class="flame-layer yellow"></div>
+                <div class="flame-layer white"></div>
+                <div class="sparks">
+                    <span></span><span></span><span></span><span></span><span></span>
                 </div>
             </div>
-            
-            <div id="ash-message" class="hidden"></div>
         </div>
 
-        <button id="burn-btn">🔥 YAK</button>
+        <div class="seal-button-container">
+            <button id="burn-btn">MÜHÜRLE VE YAK</button>
+        </div>
     </div>
 
-    <div id="bucket-container" title="Söndürmek için tıkla">
-        <div class="bucket-icon">🪣</div>
-        <span class="bucket-label">SÖNDÜR / YENİLE</span>
+    <div id="bucket-container" title="Ateşi söndür ve arın">
+        <div class="wooden-bucket">
+            <div class="water hidden" id="bucket-water"></div>
+        </div>
+        <span class="bucket-label">SÖNDÜR</span>
     </div>
 
     <script src="data.js"></script>

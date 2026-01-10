@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dert Yak</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="main-container">
+        <h1 id="page-title"></h1>
+        
+        <div class="paper-container">
+            <textarea id="thought-input" placeholder=""></textarea>
+            
+            <div id="fire-container" class="fire-wrapper hidden">
+                <div class="fire-base">
+                    <div class="flame red"></div>
+                    <div class="flame orange"></div>
+                    <div class="flame yellow"></div>
+                    <div class="flame white"></div>
+                </div>
+            </div>
+            
+            <div id="ash-message" class="hidden"></div>
+        </div>
+
+        <button id="burn-btn">🔥 YAK</button>
+    </div>
+
+    <div id="bucket-container" title="Söndürmek için tıkla">
+        <div class="bucket-icon">🪣</div>
+        <span class="bucket-label">SÖNDÜR / YENİLE</span>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

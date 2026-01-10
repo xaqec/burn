@@ -1,21 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Elementleri Seç
     const titleElement = document.getElementById('page-title');
     const inputArea = document.getElementById('thought-input');
     const burnBtn = document.getElementById('burn-btn');
     const fireContainer = document.getElementById('fire-container');
-    const fireBase = document.querySelector('.fire-base');
-    const paperContainer = document.querySelector('.paper-container');
-    const ashMessage = document.getElementById('ash-message');
+    const parchment = document.getElementById('parchment');
     const bucketBtn = document.getElementById('bucket-container');
+    const bucketWater = document.getElementById('bucket-water');
+    const bucketLabel = document.querySelector('.bucket-label');
 
-    // Verileri data.js'den çekip yerleştir
+    // Verileri yerleştir
     titleElement.textContent = siteData.title;
     inputArea.placeholder = siteData.placeholder;
     burnBtn.textContent = siteData.burnButtonText;
-    ashMessage.textContent = siteData.ashMessage;
+    bucketBtn.title = siteData.bucketTitle;
 
-    // YAKMA FONKSİYONU
+    let isBurning = false;
+
+    // --- YAKMA İŞLEMİ ---
     burnBtn.addEventListener('click', () => {
         const text = inputArea.value.trim();
 
@@ -23,48 +24,54 @@ document.addEventListener('DOMContentLoaded', () => {
             alert(siteData.alertEmpty);
             return;
         }
+        
+        if (isBurning) return; // Zaten yanıyorsa tekrar basmayı engelle
 
-        // 1. Yazıyı yavaşça yok et
+        isBurning = true;
+        
+        // 1. Yazıyı ve alanı kilitle
         inputArea.style.opacity = '0';
         inputArea.disabled = true;
+        burnBtn.disabled = true;
+        burnBtn.style.opacity = '0.5';
+        burnBtn.textContent = "YANİYOR...";
+        bucketLabel.textContent = "SÖNDÜR!";
 
-        // 2. Ateşi göster
+        // 2. Ateşi başlat (SONSUZA KADAR)
         fireContainer.classList.remove('hidden');
-        
-        // Ateşin yükselme efekti (height arttır)
-        setTimeout(() => {
-            fireBase.style.height = '300px'; // Kağıt boyu kadar
-        }, 100);
+        // Parşömene kararma efekti ekle
+        parchment.classList.add('burning');
 
-        // 3. Kağıdı karart (Yanma efekti)
-        setTimeout(() => {
-            paperContainer.classList.add('burnt-paper');
-        }, 1500);
-
-        // 4. Ateşi söndür ve külleri göster
-        setTimeout(() => {
-            fireBase.style.height = '0'; // Ateş alçalır
-            setTimeout(() => {
-                fireContainer.classList.add('hidden');
-                ashMessage.classList.remove('hidden');
-            }, 1000);
-        }, 4000); // 4 saniye yanma sürer
+        // Kova görselini hazırla (içine su koy)
+        bucketWater.classList.remove('hidden');
     });
 
-    // SÖNDÜRME / RESETLEME FONKSİYONU
+    // --- SÖNDÜRME İŞLEMİ (RESET) ---
     bucketBtn.addEventListener('click', () => {
-        // Her şeyi sıfırla
-        inputArea.value = '';
-        inputArea.style.opacity = '1';
-        inputArea.disabled = false;
-        
-        paperContainer.classList.remove('burnt-paper');
-        fireContainer.classList.add('hidden');
-        fireBase.style.height = '0';
-        ashMessage.classList.add('hidden');
-        
-        // Su dökme efekti (basit bir titreme veya ses eklenebilir)
-        // Kullanıcıya temiz bir sayfa verildiğini hissettir
-        inputArea.focus();
+        if (!isBurning) return; // Yanmıyorsa söndürme yapma
+
+        // Söndürme efekti (Kovadaki su boşalsın)
+        bucketWater.style.height = '0';
+
+        setTimeout(() => {
+            // Her şeyi sıfırla
+            inputArea.value = '';
+            inputArea.style.opacity = '1';
+            inputArea.disabled = false;
+            
+            burnBtn.disabled = false;
+            burnBtn.style.opacity = '1';
+            burnBtn.textContent = siteData.burnButtonText;
+
+            fireContainer.classList.add('hidden');
+            parchment.classList.remove('burning');
+            
+            bucketWater.classList.add('hidden');
+            bucketWater.style.height = '80%'; // Suyu bir sonraki sefer için doldur
+            bucketLabel.textContent = "SÖNDÜR";
+            
+            isBurning = false;
+            inputArea.focus();
+        }, 500); // Su boşalma animasyonu bitince resetle
     });
 });

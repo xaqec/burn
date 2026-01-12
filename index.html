@@ -3,45 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruhunu Arındır</title>
+    <title>Dert Yakma Mahzeni</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <!-- Medieval Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="dungeon-bg"></div>
-
-    <div class="main-frame">
-        <h1 id="page-title"></h1>
+    <div class="dungeon-container">
+        <h1 class="title">Ruhundaki Yükü Buraya Dök</h1>
         
-        <div class="parchment-container" id="parchment">
-            <textarea id="thought-input" placeholder=""></textarea>
-            
-            <div id="char-overlay" class="hidden"></div>
-
-            <div id="fire-container" class="fire-wrapper hidden">
-                <div class="flame-layer dark"></div>
-                <div class="flame-layer red"></div>
-                <div class="flame-layer orange"></div>
-                <div class="flame-layer yellow"></div>
-                <div class="flame-layer white"></div>
-                <div class="sparks">
-                    <span></span><span></span><span></span><span></span><span></span>
-                </div>
+        <div class="scroll-container">
+            <div class="parchment">
+                <textarea id="ventInput" placeholder="Seni huzursuz eden nedir? Buraya yaz ve ateşe ver..."></textarea>
+                <canvas id="fireCanvas"></canvas>
             </div>
         </div>
 
-        <div class="seal-button-container">
-            <button id="burn-btn">MÜHÜRLE VE YAK</button>
+        <button id="burnBtn" class="medieval-btn">
+            <span>🔥 YAK GİTSİN 🔥</span>
+        </button>
+
+        <div id="waterBucket" class="bucket-container" title="Söndürmek için tıkla">
+            <div class="bucket-icon">🪣</div>
+            <span class="bucket-label">Söndür</span>
         </div>
     </div>
 
-    <div id="bucket-container" title="Ateşi söndür ve arın">
-        <div class="wooden-bucket">
-            <div class="water hidden" id="bucket-water"></div>
-        </div>
-        <span class="bucket-label">SÖNDÜR</span>
-    </div>
+    <!-- Ses Dosyaları (Opsiyonel, efekt için boş bırakılabilir ama yapı hazır) -->
+    <!-- <audio id="fireSound" src="fire.mp3" loop></audio> -->
+    <!-- <audio id="hissSound" src="hiss.mp3"></audio> -->
 
     <script src="data.js"></script>
     <script src="script.js"></script>

@@ -1,70 +1,68 @@
-/* === GENEL AYARLAR & FONTLAR === */
 :root {
-    --main-font: 'Cinzel Decorative', cursive;
-    --script-font: 'Dancing Script', cursive;
-    --bg-color: #0a0a0a;
-    --parchment-bg: #d4c398;
-    --fire-glow: rgba(255, 100, 0, 0.6);
+    --bg-color: #0f0a05;
+    --text-color: #3e2723;
+    --parchment-bg: #d7c49e;
+    --btn-color: #8b0000;
+    --btn-hover: #a50000;
+    --glow-color: rgba(255, 69, 0, 0.6);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    margin: 0;
-    padding: 0;
     background-color: var(--bg-color);
-    color: #e0e0e0;
-    font-family: var(--main-font);
+    background-image: radial-gradient(circle at center, #1a1008 0%, #000000 100%);
+    font-family: 'MedievalSharp', cursive;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
     overflow: hidden;
+    color: #d1d1d1;
 }
 
-/* Arka Plan Dokusu (Zindan Duvarı) */
-.dungeon-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
+.dungeon-container {
+    text-align: center;
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.title {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8), 0 0 20px var(--glow-color);
+    letter-spacing: 2px;
+    color: #e0c097;
+}
+
+/* Parşömen Alanı */
+.scroll-container {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    margin: 0 auto 40px auto;
+    background: transparent;
+    perspective: 1000px;
+}
+
+.parchment {
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, #2a2a2a 0%, #000000 100%);
-    opacity: 0.8;
-    z-index: -1;
-}
-
-/* Ana Çerçeve (Demir İşlemeli Görünüm) */
-.main-frame {
-    text-align: center;
-    width: 90%;
-    max-width: 650px;
+    background-color: var(--parchment-bg);
+    background-image: url('https://www.transparenttextures.com/patterns/aged-paper.png');
+    border: 15px solid #2c1b10;
+    border-radius: 10px;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.5), 0 10px 30px rgba(0,0,0,0.7);
     padding: 30px;
-    border: 4px solid #4a3b2a;
-    border-image: linear-gradient(to bottom, #8b6c42, #2a1f14) 1;
-    background: rgba(0,0,0,0.6);
-    box-shadow: 0 0 50px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,0,0,0.5);
     position: relative;
-    z-index: 10;
-}
-
-h1 {
-    font-weight: 700;
-    margin-bottom: 25px;
-    letter-spacing: 3px;
-    color: #cda45e;
-    text-shadow: 2px 2px 4px #000;
-}
-
-/* === PARŞÖMEN ALANI === */
-.parchment-container {
-    position: relative;
-    width: 100%;
-    height: 350px;
-    /* Eski kağıt görünümü için gradyan */
-    background: radial-gradient(ellipse at center, var(--parchment-bg) 0%, #a89266 100%);
-    border-radius: 5px;
-    box-shadow: inset 0 0 30px rgba(71, 58, 38, 0.8), 0 10px 20px rgba(0,0,0,0.5);
-    overflow: hidden;
-    border: 2px solid #5e4a32;
+    transform: rotateX(5deg);
+    transition: transform 0.5s ease;
 }
 
 textarea {
@@ -72,229 +70,106 @@ textarea {
     height: 100%;
     background: transparent;
     border: none;
-    color: #3d2b1f; /* Mürekkep rengi */
-    padding: 30px 40px;
-    font-size: 1.8rem;
-    font-weight: 600;
-    font-family: var(--script-font); /* El yazısı fontu */
     resize: none;
-    box-sizing: border-box;
+    font-family: 'MedievalSharp', cursive;
+    font-size: 1.5rem;
+    color: var(--text-color);
     outline: none;
-    transition: opacity 1s ease;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 textarea::placeholder {
-    color: #7a654d;
-    opacity: 0.7;
+    color: rgba(62, 39, 35, 0.5);
+    font-style: italic;
 }
 
-/* Parşömen Kararma Efekti (Yanarken) */
-#char-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at bottom, rgba(0,0,0,0.9) 10%, rgba(50,20,0,0.6) 60%, transparent 100%);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 3s ease-in;
-}
-.burning #char-overlay {
-    opacity: 1;
-}
-
-/* ===BUTON (Mühür) === */
-.seal-button-container {
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-}
-
-#burn-btn {
-    padding: 15px 30px;
-    /* Erimiş kırmızı mum/metal görünümü */
-    background: linear-gradient(to bottom, #a32a1d, #6e160e);
-    color: #eebb88;
-    border: 3px solid #4a0e09;
-    border-radius: 12px;
-    font-size: 1.3rem;
-    cursor: pointer;
-    font-family: var(--main-font);
-    text-shadow: 1px 1px 2px #000;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5), inset 0 2px 5px rgba(255,100,100,0.3);
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-}
-
-#burn-btn:hover {
-    background: linear-gradient(to bottom, #c93626, #8a1c12);
-    transform: translateY(-2px);
-    box-shadow: 0 7px 20px rgba(163, 42, 29, 0.6);
-}
-
-#burn-btn:active {
-    transform: translateY(1px);
-}
-
-/* === SU KOVASI (Orta Çağ Tarzı) === */
-#bucket-container {
-    position: fixed;
-    right: 40px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    text-align: center;
-    z-index: 20;
-    transition: transform 0.3s ease;
-}
-
-#bucket-container:hover {
-    transform: translateY(-50%) rotate(-10deg) scale(1.1);
-}
-
-.wooden-bucket {
-    width: 60px;
-    height: 70px;
-    background: repeating-linear-gradient(to right, #5e4a32, #5e4a32 5px, #4a3b2a 5px, #4a3b2a 10px);
-    border-radius: 5px 5px 15px 15px;
-    border: 4px solid #2a1f14; /* Demir bantlar */
-    border-top: none;
-    position: relative;
-    box-shadow: 0 5px 10px rgba(0,0,0,0.5);
-}
-
-/* Kova sapı */
-.wooden-bucket::before {
-    content: '';
-    position: absolute;
-    top: -30px;
-    left: 10%;
-    width: 80%;
-    height: 30px;
-    border: 4px solid #2a1f14;
-    border-bottom: none;
-    border-radius: 30px 30px 0 0;
-}
-
-.water {
+/* Ateş Efekti Canvası */
+#fireCanvas {
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 80%;
-    background: rgba(52, 152, 219, 0.8);
-    border-radius: 0 0 10px 10px;
-    transition: height 0.5s;
+    height: 100%;
+    pointer-events: none; /* Tıklamaları engelleme */
+    opacity: 0; /* Başlangıçta görünmez */
+    transition: opacity 1s ease-in;
+    mix-blend-mode: hard-light; /* Ateşin yazıyla karışması için */
+}
+
+/* Buton Tasarımı */
+.medieval-btn {
+    background: linear-gradient(to bottom, #8b0000, #5c0000);
+    border: 4px solid #b8860b;
+    color: #ffd700;
+    font-family: 'MedievalSharp', cursive;
+    font-size: 1.8rem;
+    padding: 15px 50px;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(255, 69, 0, 0.4), inset 0 0 10px rgba(0,0,0,0.5);
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.medieval-btn:hover {
+    background: linear-gradient(to bottom, #a50000, #700000);
+    box-shadow: 0 0 25px rgba(255, 69, 0, 0.8), inset 0 0 10px rgba(0,0,0,0.5);
+    transform: scale(1.05);
+}
+
+.medieval-btn:active {
+    transform: scale(0.95);
+}
+
+/* Su Kovası */
+.bucket-container {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    text-align: center;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.3s, transform 0.3s;
+    filter: grayscale(80%);
+}
+
+.bucket-container:hover {
+    transform: rotate(-10deg) scale(1.1);
+}
+
+.bucket-container.active {
+    opacity: 1;
+    filter: grayscale(0%);
+    animation: bounce 2s infinite;
+}
+
+.bucket-icon {
+    font-size: 4rem;
+    text-shadow: 0 5px 10px rgba(0,0,0,0.5);
 }
 
 .bucket-label {
     display: block;
-    font-size: 1rem;
-    margin-top: 15px;
-    color: #8b6c42;
-    font-family: var(--main-font);
-    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 5px;
+    color: #4da6ff;
+    text-shadow: 0 0 5px #000;
 }
 
-
-/* === GELİŞMİŞ GERÇEKÇİ ATEŞ EFEKTİ === */
-.hidden { display: none !important; }
-
-.fire-wrapper {
-    position: absolute;
-    bottom: -50px; /* Alttan başlasın */
-    left: 0;
-    width: 100%;
-    height: 120%; /* Parşömeni aşsın */
-    pointer-events: none;
-    z-index: 5;
-    filter: contrast(1.2);
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-10px);}
+    60% {transform: translateY(-5px);}
 }
 
-/* Alev Katmanlarının Ortak Özellikleri */
-.flame-layer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform-origin: bottom center;
-    opacity: 0.9;
-    /* Maskeleme ile alev şekli veriyoruz */
-    -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 0 C 20 80, 0 90, 10 100 H 90 C 100 90, 80 80, 50 0 Z" fill="black"/></svg>');
-    mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 0 C 20 80, 0 90, 10 100 H 90 C 100 90, 80 80, 50 0 Z" fill="black"/></svg>');
-    -webkit-mask-size: 100% 100%;
-    mask-size: 100% 100%;
+.shaking {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both infinite;
 }
 
-/* Katman Renkleri ve Animasyonları */
-.flame-layer.dark {
-    background: #220000;
-    animation: flicker 1.5s infinite alternate, wave 3s infinite linear;
-    opacity: 0.6;
-}
-.flame-layer.red {
-    background: linear-gradient(to top, #8a1c12, transparent);
-    animation: flicker 0.3s infinite alternate, wave 2.5s infinite linear;
-    height: 95%; left: 2%; width: 96%;
-}
-.flame-layer.orange {
-    background: linear-gradient(to top, #ff4500, transparent);
-    animation: flicker 0.2s infinite alternate-reverse, wave 2s infinite linear reverse;
-    height: 85%; left: 5%; width: 90%;
-}
-.flame-layer.yellow {
-    background: linear-gradient(to top, #ffcc00, transparent);
-    animation: flicker 0.1s infinite alternate, wave 1.5s infinite linear;
-    height: 70%; left: 10%; width: 80%;
-}
-.flame-layer.white {
-    background: linear-gradient(to top, #ffffff, #ffffcc, transparent);
-    animation: flicker 0.05s infinite alternate-reverse;
-    height: 45%; left: 20%; width: 60%;
-    opacity: 1;
-    box-shadow: 0 0 20px #fff, 0 0 40px #ffcc00;
-}
-
-/* Kıvılcımlar */
-.sparks {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
-}
-.sparks span {
-    position: absolute;
-    bottom: 0;
-    width: 4px;
-    height: 4px;
-    background: #fff;
-    border-radius: 50%;
-    opacity: 0;
-    animation: rise 2s infinite ease-in;
-}
-.sparks span:nth-child(1) { left: 20%; animation-delay: 0.2s; }
-.sparks span:nth-child(2) { left: 40%; animation-delay: 0.5s; }
-.sparks span:nth-child(3) { left: 60%; animation-delay: 0.1s; }
-.sparks span:nth-child(4) { left: 80%; animation-delay: 0.8s; }
-.sparks span:nth-child(5) { left: 50%; animation-delay: 1.2s; }
-
-
-/* Animasyon Keyframe'leri */
-@keyframes flicker {
-    0% { opacity: 0.8; transform: scaleY(1) scaleX(1); filter: blur(2px); }
-    100% { opacity: 1; transform: scaleY(1.05) scaleX(0.98); filter: blur(4px); }
-}
-@keyframes wave {
-    0% { transform: skewX(-3deg); }
-    50% { transform: skewX(3deg); }
-    100% { transform: skewX(-3deg); }
-}
-@keyframes rise {
-    0% { bottom: 0; opacity: 1; transform: translateX(0); }
-    50% { opacity: 0.8; }
-    100% { bottom: 120%; opacity: 0; transform: translateX(20px); }
+@keyframes shake {
+    10%, 90% { transform: rotateX(5deg) translate3d(-1px, 0, 0); }
+    20%, 80% { transform: rotateX(5deg) translate3d(2px, 0, 0); }
+    30%, 50%, 70% { transform: rotateX(5deg) translate3d(-4px, 0, 0); }
+    40%, 60% { transform: rotateX(5deg) translate3d(4px, 0, 0); }
 }

@@ -3,34 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bırak Gitsin — Dertlerini Yak</title>
-    <meta name="description" content="İçini rahatsız eden ne varsa yaz ve ateşe ver. Dijital terapi, rahatlatıcı bir deneyim.">
+    <title>Birak Gitsin</title>
+    <meta name="description" content="Icini rahatsiz eden ne varsa yaz ve atese ver. Dijital terapi, rahatlatici bir deneyim.">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Playfair+Display:ital,wght@0,500;1,500&amp;display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- Ambient background particles -->
     <canvas id="ambientCanvas"></canvas>
 
     <main class="app-container">
-        <!-- Header -->
         <header class="header">
             <div class="logo">
-                <span class="logo-icon">🕊️</span>
-                <span class="logo-text">bırak gitsin</span>
+                <span class="logo-icon">&#x1F54A;&#xFE0F;</span>
+                <span class="logo-text">birak gitsin</span>
             </div>
-            <p class="subtitle">Yükünü buraya bırak. Yaz, yak, özgürleş.</p>
+            <p class="subtitle">Y&uuml;k&uuml;n&uuml; buraya birak. Yaz, yak, &ouml;zg&uuml;rles.</p>
         </header>
 
-        <!-- Card -->
         <section class="card" id="mainCard">
             <div class="card-inner">
-                <textarea 
-                    id="ventInput" 
-                    placeholder="İçini rahatsız eden ne varsa buraya yaz..."
+                <textarea
+                    id="ventInput"
+                    placeholder="Icini rahatsiz eden ne varsa buraya yaz..."
                     maxlength="2000"
                 ></textarea>
                 <canvas id="fireCanvas"></canvas>
@@ -38,30 +35,27 @@
             </div>
         </section>
 
-        <!-- Actions -->
         <div class="actions">
             <button id="burnBtn" class="btn-burn" type="button">
                 <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2c0 4-4 6-4 10a4 4 0 0 0 8 0c0-4-4-6-4-10z"/>
-                    <path d="M12 18a2 2 0 0 1-2-2c0-2 2-3 2-5 0 2 2 3 2 5a2 2 0 0 1-2 2z"/>
+                    <path d="M12 2c0 4-4 6-4 10a4 4 0 0 0 8 0c0-4-4-6-4-10z"></path>
+                    <path d="M12 18a2 2 0 0 1-2-2c0-2 2-3 2-5 0 2 2 3 2 5a2 2 0 0 1-2 2z"></path>
                 </svg>
-                <span id="btnText">Ateşe Ver</span>
+                <span id="btnText">Atese Ver</span>
             </button>
 
             <button id="extinguishBtn" class="btn-extinguish" type="button" disabled>
                 <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+                    <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
                 </svg>
-                <span>Söndür</span>
+                <span>S&ouml;nd&uuml;r</span>
             </button>
         </div>
 
-        <!-- Footer message -->
-        <p class="footer-msg" id="footerMsg">Yazdıkların hiçbir yere kaydedilmez. Sadece sen ve ateş.</p>
+        <p class="footer-msg" id="footerMsg">Yazdiklarin hicbir yere kaydedilmez. Sadece sen ve ates.</p>
     </main>
 
     <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
-
